@@ -1,0 +1,23 @@
+###This is a simple modification with instruction on official website. https://www.focalboard.com/docs/personal-edition/docker/
+###This provides better data-persistant with three steppes.
+##step one, in the project folder, create a compose.yml file with below code from line 8 to the end. 
+#  nano compose.yml
+##step two, make a folder called 'focalboard_data'
+#  mkdir focalboard_data
+#  sudo chmod 777 focalboard_data      #fix permission issue
+##step three, run the project
+#  docker compose up -d
+  
+
+  
+
+
+services:
+    focalboard:
+##        expose: [8000/tcp] ##use this instead of ports on demand. for example: when used with a nginx service as reverse proxy.
+        ports:
+            - 80:8000   
+        restart: always
+        image: mattermost/focalboard
+        volumes:
+            - ./focalboard_data:/opt/focalboard/data
